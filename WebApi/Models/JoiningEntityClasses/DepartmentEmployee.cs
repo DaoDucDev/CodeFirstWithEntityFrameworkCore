@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace WebApi.Models
+namespace WebApi.Models.JoiningEntityClasses
 {
-    [Table("salaries")]
-    public class Salary
+    [Table("dept_emp")]
+    public class DepartmentEmployee
     {
         [Column("emp_no")]
         public Guid EmpNo { get; set; }
+        [Column("dept_no")]
+        public Guid DeptNo { get; set; }
 
         [Column("from_date")]
         public DateTime FromDate { get; set; }
@@ -15,9 +20,7 @@ namespace WebApi.Models
         [Column("to_date")]
         public DateTime ToDate { get; set; }
 
-        [Column("salary")]
-        public double EmpSalary { get; set; }
-
         public Employee Employee { get; set; }
+        public Department Department { get; set; }
     }
 }

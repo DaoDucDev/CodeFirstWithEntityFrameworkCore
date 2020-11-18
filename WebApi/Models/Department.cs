@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Models.JoiningEntityClasses;
 
 namespace WebApi.Models
 {
@@ -17,5 +18,7 @@ namespace WebApi.Models
         [Column("dept_name")]
         public string DeptName { get; set; }
 
+        public ICollection<DeptManager> DeptManagers { get; set; }
+        public IList<DepartmentEmployee> DepartmentEmployees { get; set; }
     }
 }

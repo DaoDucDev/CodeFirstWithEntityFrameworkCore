@@ -1352,21 +1352,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nasa1\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\nasa1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Learn\\MyProjects\\CodeFirstWithEntityFrameworkCore\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\nasa1\\Desktop\\MyProjects\\CodeFirstWithEntityFrameworkCore\\WebApi\\WebApi.csproj",
       "projectName": "WebApi",
-      "projectPath": "D:\\Learn\\MyProjects\\CodeFirstWithEntityFrameworkCore\\WebApi\\WebApi.csproj",
+      "projectPath": "C:\\Users\\nasa1\\Desktop\\MyProjects\\CodeFirstWithEntityFrameworkCore\\WebApi\\WebApi.csproj",
       "packagesPath": "C:\\Users\\nasa1\\.nuget\\packages\\",
-      "outputPath": "D:\\Learn\\MyProjects\\CodeFirstWithEntityFrameworkCore\\WebApi\\obj\\",
+      "outputPath": "C:\\Users\\nasa1\\Desktop\\MyProjects\\CodeFirstWithEntityFrameworkCore\\WebApi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\nasa1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
