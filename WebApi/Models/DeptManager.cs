@@ -20,5 +20,9 @@ namespace WebApi.Models
 
         [Column("to_date")]
         public DateTime ToDate { get; set; }
+
+        public Employee Employee { get; set; }
+
+        public Department Department { get; set; }
     }
 }

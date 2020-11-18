@@ -10,8 +10,8 @@ using WebApi.DatabaseContext;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    [Migration("20201117180625_EmployeeMigration")]
-    partial class EmployeeMigration
+    [Migration("20201118075153_Employee")]
+    partial class Employee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,12 @@ namespace WebApi.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("emp_no");
 
+                    b.Property<Guid?>("DepartmentDeptNo")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("EmployeeEmpNo")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("from_date");
@@ -56,6 +62,10 @@ namespace WebApi.Migrations
                         .HasColumnName("to_date");
 
                     b.HasKey("DeptNo", "EmpNo");
+
+                    b.HasIndex("DepartmentDeptNo");
+
+                    b.HasIndex("EmployeeEmpNo");
 
                     b.ToTable("dept_manager");
                 });
@@ -92,6 +102,31 @@ namespace WebApi.Migrations
                     b.ToTable("employees");
                 });
 
+            modelBuilder.Entity("WebApi.Models.JoiningEntityClasses.DepartmentEmployee", b =>
+                {
+                    b.Property<Guid>("DeptNo")
+                        .HasColumnType("uuid")
+                        .HasColumnName("dept_no");
+
+                    b.Property<Guid>("EmpNo")
+                        .HasColumnType("uuid")
+                        .HasColumnName("emp_no");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("from_date");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("to_date");
+
+                    b.HasKey("DeptNo", "EmpNo");
+
+                    b.HasIndex("EmpNo");
+
+                    b.ToTable("dept_emp");
+                });
+
             modelBuilder.Entity("WebApi.Models.Salary", b =>
                 {
                     b.Property<Guid>("EmpNo")
@@ -110,7 +145,12 @@ namespace WebApi.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("salary");
 
+                    b.Property<Guid?>("EmployeeEmpNo")
+                        .HasColumnType("uuid");
+
                     b.HasKey("EmpNo", "FromDate", "ToDate");
+
+                    b.HasIndex("EmployeeEmpNo");
 
                     b.ToTable("salaries");
                 });
@@ -143,6 +183,49 @@ namespace WebApi.Migrations
                     b.ToTable("titles");
                 });
 
+            modelBuilder.Entity("WebApi.Models.DeptManager", b =>
+                {
+                    b.HasOne("WebApi.Models.Department", "Department")
+                        .WithMany("DeptManagers")
+                        .HasForeignKey("DepartmentDeptNo");
+
+                    b.HasOne("WebApi.Models.Employee", "Employee")
+                        .WithMany("DeptManagers")
+                        .HasForeignKey("EmployeeEmpNo");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("WebApi.Models.JoiningEntityClasses.DepartmentEmployee", b =>
+                {
+                    b.HasOne("WebApi.Models.Department", "Department")
+                        .WithMany("DepartmentEmployees")
+                        .HasForeignKey("DeptNo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApi.Models.Employee", "Employee")
+                        .WithMany("DepartmentEmployees")
+                        .HasForeignKey("EmpNo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("WebApi.Models.Salary", b =>
+                {
+                    b.HasOne("WebApi.Models.Employee", "Employee")
+                        .WithMany("Salaries")
+                        .HasForeignKey("EmployeeEmpNo");
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("WebApi.Models.Title", b =>
                 {
                     b.HasOne("WebApi.Models.Employee", "Employee")
@@ -152,8 +235,21 @@ namespace WebApi.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("WebApi.Models.Department", b =>
+                {
+                    b.Navigation("DepartmentEmployees");
+
+                    b.Navigation("DeptManagers");
+                });
+
             modelBuilder.Entity("WebApi.Models.Employee", b =>
                 {
+                    b.Navigation("DepartmentEmployees");
+
+                    b.Navigation("DeptManagers");
+
+                    b.Navigation("Salaries");
+
                     b.Navigation("Titles");
                 });
 #pragma warning restore 612, 618

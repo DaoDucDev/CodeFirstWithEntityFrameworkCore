@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApi.Models.JoiningEntityClasses;
 
 namespace WebApi.Models
 {
@@ -29,6 +30,9 @@ namespace WebApi.Models
         public DateTime HireDate { get; set; }
 
         public ICollection<Title> Titles { get; set; }
+        public ICollection<Salary> Salaries { get; set; }
+        public ICollection<DeptManager> DeptManagers { get; set; }
 
+        public IList<DepartmentEmployee> DepartmentEmployees { get; set; }
     }
 }
